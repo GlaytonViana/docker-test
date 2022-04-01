@@ -1,0 +1,41 @@
+version: '3.8'
+
+networks:
+    elanto-network:
+        driver: bridge
+        
+services:
+    web:
+        image: nginx:1.21.6-alpine
+        container_name: elanto-nginx
+        hostname: elanto-nginx
+        networks:
+            - elanto-network
+        ports:
+            - '80:80'
+        restart: unless-stopped
+        depends_on:
+            - app
+        volumes:
+            - ./application/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+    app:
+        container_name: elanto-server-app
+        hostname: elanto-server-app
+        networks:
+            - elanto-network
+        ports:
+            - 3000
+        restart: always
+        # localização do arquivo Dockerfile
+        build:
+            context: ./application/app
+            dockerfile: Dockerfile
+        command: yarn dev
+        
+        volumes:
+            - ./application/app:/usr/node/app
+            - ignore:/usr/node/app/node_modules/
+
+volumes:
+    ignore:
