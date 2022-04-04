@@ -31,7 +31,8 @@ services:
         build:
             context: ./application/app
             dockerfile: Dockerfile
-        command: yarn build
+        command: >
+            sh -c "yarn build && node dist/server.js"
         
         volumes:
             - ./application/app:/usr/node/app
