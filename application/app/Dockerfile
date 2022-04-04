@@ -18,6 +18,9 @@ WORKDIR /usr/node/app
 COPY tsconfig.json ./
 COPY src ./src
 
+RUN yarn global add pm2
+RUN yarn build
+
 # qual porta do container será exposta
 EXPOSE 3000
 
