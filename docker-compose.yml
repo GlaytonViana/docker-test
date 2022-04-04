@@ -32,7 +32,9 @@ services:
             context: ./application/app
             dockerfile: Dockerfile
         command: >
-            sh -c "yarn build && pm2 start dist/server.js --name app-server --max-memory 1G"
+            sh -c "yarn global add pm2 
+                && yarn build 
+                && pm2 start dist/server.js --name app-server --max-memory 1G"
         
         volumes:
             - ./application/app:/usr/node/app
