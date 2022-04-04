@@ -32,7 +32,7 @@ services:
             context: ./application/app
             dockerfile: Dockerfile
         command: >
-            sh -c "pm2-runtime start dist/server.js --name app-server --max-memory-restart 1G"
+            sh -c "yarn build && pm2-runtime start dist/server.js --name app-server --max-memory-restart 1G"
         
         volumes:
             - ./application/app:/usr/node/app
