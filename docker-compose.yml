@@ -31,7 +31,7 @@ services:
         build:
             context: ./application/app
             dockerfile: Dockerfile
-        command: yarn dev
+        command: yarn build
         
         volumes:
             - ./application/app:/usr/node/app
